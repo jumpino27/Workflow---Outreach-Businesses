@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  document.html  —  CLIENT "HOW I WORK" PAGE  ·  LOCAL MODE (home turf)
+  ============================================================================
+  WHAT THIS IS:
+    The page you attach NEXT TO preview.html. It explains your process, your
+    "happy first, then you pay" guarantee, and carries the PRICE (the email
+    itself stays price-free). Four languages, switch with the buttons on top.
+
+  USE THIS FILE WHEN: OPERATING_MODE=LOCAL  (pitching your home region).
+  The AWAY / remote version is me.html.
+
+  HOW THE AGENT PERSONALISES IT PER BUSINESS (string-replace these tokens):
+    {{BUSINESS_NAME}}  {{TOWN}}        ← the prospect
+    {{OPERATOR_NAME}}  {{BRAND_NAME}}  {{MAIN_WEBSITE}}   ← from .env
+    {{PRICE_AMOUNT}}   {{CURRENCY}}    {{YEARLY_UPKEEP}}  ← chosen tier (§4.0a)
+    {{TIER_LABEL}}     {{TIER_BODY}}   ← short label + sentence for the tier
+  WEBSITE-ONLY (default): leave the App callout removed. Add it back only for
+  an actual app lead, and fill the app_* strings.
+  ============================================================================
+-->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>So arbeite ich — {{BUSINESS_NAME}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#241f1a; --soft:#5b5249; --line:#e4ddd2;
+    --paper:#faf6ef; --card:#fffdf8; --accent:#9a5b2c; --accent-soft:#f0e3d4;
+    --good:#4a6b48;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Outfit",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  h1,h2{font-family:"Fraunces",Georgia,serif;font-weight:600;line-height:1.15;letter-spacing:-.01em}
+  h1{font-size:2.4rem;margin-bottom:14px}
+  h2{font-size:1.5rem;margin-bottom:14px;color:var(--ink)}
+  p{color:var(--soft);margin-bottom:14px}
+  /* language bar */
+  .langbar{position:sticky;top:0;z-index:5;background:rgba(250,246,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .langbar .row{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:12px 24px;max-width:760px;margin:0 auto}
+  .langbar .brand{margin-right:auto;font-family:"Fraunces",serif;font-weight:600;color:var(--ink)}
+  .lang{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--card);color:var(--soft);border-radius:999px;padding:6px 13px;cursor:pointer}
+  .lang.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  /* hero */
+  .hero{padding:56px 0 40px}
+  .eyebrow{color:var(--accent);font-weight:600;font-size:.95rem;margin-bottom:10px}
+  /* sections */
+  section{padding:34px 0;border-top:1px solid var(--line)}
+  .steps{display:grid;gap:16px;margin-top:8px}
+  .step{display:flex;gap:16px;align-items:flex-start}
+  .step .n{flex:0 0 38px;height:38px;border-radius:12px;background:var(--accent-soft);color:var(--accent);font-family:"Fraunces",serif;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.05rem;margin-bottom:2px;color:var(--ink);font-weight:600}
+  .step p{margin:0}
+  /* guarantee */
+  .guarantee{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+  .guarantee .badge{display:inline-block;background:var(--good);color:#fff;font-size:.8rem;font-weight:600;padding:5px 12px;border-radius:999px;margin-bottom:12px}
+  /* price */
+  .price{background:var(--ink);color:var(--paper);border-radius:20px;padding:30px}
+  .price h2{color:var(--paper)}
+  .price p{color:#d8cdbf}
+  .amount{font-family:"Fraunces",serif;font-size:2.6rem;font-weight:600;color:#fff;margin:6px 0}
+  .upkeep{font-size:.92rem;color:#b8ad9d;border-top:1px solid #3a332c;padding-top:14px;margin-top:14px}
+  /* tip */
+  .tip{background:var(--accent-soft);border-radius:16px;padding:20px 22px}
+  .tip strong{color:var(--accent)}
+  footer{padding:40px 0;border-top:1px solid var(--line);color:var(--soft);font-size:.92rem}
+  footer a{color:var(--accent);text-decoration:none}
+  @media(max-width:520px){h1{font-size:1.95rem}.langbar .brand{display:none}}
+</style>
+</head>
+<body>
+
+<div class="langbar">
+  <div class="row">
+    <span class="brand">{{BRAND_NAME}}</span>
+    <button class="lang active" data-lang="de">DE</button>
+    <button class="lang" data-lang="it">IT</button>
+    <button class="lang" data-lang="en">EN</button>
+    <button class="lang" data-lang="ro">RO</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow" data-i18n="eyebrow">So arbeite ich</div>
+    <h1 data-i18n="intro">Hallo {{BUSINESS_NAME}} in {{TOWN}}!</h1>
+    <p data-i18n="sub">Ich baue moderne Webseiten für lokale Betriebe — und für euch hätte ich schon eine erste Vorschau zusammengestellt. Hier kurz, wie ich arbeite und was es kostet.</p>
+  </header>
+
+  <section>
+    <h2 data-i18n="how_title">In drei einfachen Schritten</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div><h3 data-i18n="s1t">Vorschau ansehen</h3><p data-i18n="s1b">Ihr schaut euch die kleine Vorschau eurer möglichen Seite an. Kostenlos, unverbindlich.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3 data-i18n="s2t">Gemeinsam anpassen</h3><p data-i18n="s2b">Gefällt euch die Richtung, passen wir Texte, Bilder und Farben so an, dass sie ganz nach euch aussieht.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3 data-i18n="s3t">Zufrieden, dann zahlen</h3><p data-i18n="s3b">Erst wenn ihr wirklich zufrieden seid, geht die Seite online — und erst dann zahlt ihr.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="guarantee">
+      <span class="badge" data-i18n="g_badge">Meine Garantie</span>
+      <h2 data-i18n="g_title">Zuerst zufrieden, dann zahlen</h2>
+      <p data-i18n="g_body">Kein Risiko für euch. Ihr seht zuerst das Ergebnis. Gefällt es euch nicht, kostet es nichts. So einfach.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="price">
+      <h2 data-i18n="p_title">Was es kostet</h2>
+      <p data-i18n="p1_label">{{TIER_LABEL}}</p>
+      <div class="amount">{{CURRENCY}}{{PRICE_AMOUNT}}</div>
+      <p data-i18n="p1_body">{{TIER_BODY}}</p>
+      <div class="upkeep" data-i18n="upkeep">+ {{CURRENCY}}{{YEARLY_UPKEEP}} pro Jahr für Domain, geschäftliche E-Mail-Adresse und laufende Pflege.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-i18n="seo_title">Auch bei Google gefunden werden</h2>
+    <p data-i18n="seo_body">Eure Seite wird so gebaut, dass Gäste euch leichter über Google finden — mit eurem Ort, eurem Angebot und sauberer Technik im Hintergrund. Dazu eine eigene geschäftliche E-Mail-Adresse und auf Wunsch ein kleiner Chat-Assistent, der häufige Fragen eurer Gäste automatisch beantwortet.</p>
+  </section>
+
+  <section>
+    <div class="tip">
+      <p style="margin:0" data-i18n="tip"><strong>Tipp aus Südtirol:</strong> Für die Digitalisierung kleiner Betriebe gibt es immer wieder Landesförderungen. Sagt mir Bescheid — ich helfe euch gern, das Passende zu finden.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p style="margin:0" data-i18n="foot">Geschrieben von {{OPERATOR_NAME}} · {{BRAND_NAME}} · <a href="https://{{MAIN_WEBSITE}}">{{MAIN_WEBSITE}}</a></p>
+  </footer>
+
+</div>
+
+<script>
+/* Per-language dictionary. The agent rewrites the four `intro` values + the
+   p1_label / p1_body strings per business; the rest stays. */
+const I18N = {
+  de:{
+    eyebrow:"So arbeite ich",
+    intro:"Hallo {{BUSINESS_NAME}} in {{TOWN}}!",
+    sub:"Ich baue moderne Webseiten für lokale Betriebe — und für euch hätte ich schon eine erste Vorschau zusammengestellt. Hier kurz, wie ich arbeite und was es kostet.",
+    how_title:"In drei einfachen Schritten",
+    s1t:"Vorschau ansehen", s1b:"Ihr schaut euch die kleine Vorschau eurer möglichen Seite an. Kostenlos, unverbindlich.",
+    s2t:"Gemeinsam anpassen", s2b:"Gefällt euch die Richtung, passen wir Texte, Bilder und Farben so an, dass sie ganz nach euch aussieht.",
+    s3t:"Zufrieden, dann zahlen", s3b:"Erst wenn ihr wirklich zufrieden seid, geht die Seite online — und erst dann zahlt ihr.",
+    g_badge:"Meine Garantie", g_title:"Zuerst zufrieden, dann zahlen",
+    g_body:"Kein Risiko für euch. Ihr seht zuerst das Ergebnis. Gefällt es euch nicht, kostet es nichts. So einfach.",
+    p_title:"Was es kostet", p1_label:"{{TIER_LABEL}}", p1_body:"{{TIER_BODY}}",
+    upkeep:"+ {{CURRENCY}}{{YEARLY_UPKEEP}} pro Jahr für Domain, geschäftliche E-Mail-Adresse und laufende Pflege.",
+    seo_title:"Auch bei Google gefunden werden",
+    seo_body:"Eure Seite wird so gebaut, dass Gäste euch leichter über Google finden — mit eurem Ort, eurem Angebot und sauberer Technik im Hintergrund. Dazu eine eigene geschäftliche E-Mail-Adresse und auf Wunsch ein kleiner Chat-Assistent, der häufige Fragen eurer Gäste automatisch beantwortet.",
+    tip:"<strong>Tipp aus Südtirol:</strong> Für die Digitalisierung kleiner Betriebe gibt es immer wieder Landesförderungen. Sagt mir Bescheid — ich helfe euch gern, das Passende zu finden.",
+    foot:"Geschrieben von {{OPERATOR_NAME}} · {{BRAND_NAME}} · <a href='https://{{MAIN_WEBSITE}}'>{{MAIN_WEBSITE}}</a>"
+  },
+  it:{
+    eyebrow:"Come lavoro",
+    intro:"Ciao {{BUSINESS_NAME}} a {{TOWN}}!",
+    sub:"Realizzo siti moderni per attività locali — e per voi ho già preparato una prima anteprima. Ecco in breve come lavoro e quanto costa.",
+    how_title:"In tre semplici passi",
+    s1t:"Guardate l'anteprima", s1b:"Date un'occhiata alla piccola anteprima del vostro possibile sito. Gratis, senza impegno.",
+    s2t:"Sistemiamo insieme", s2b:"Se la direzione vi piace, adattiamo testi, foto e colori finché non rispecchia davvero voi.",
+    s3t:"Prima soddisfatti, poi pagate", s3b:"Il sito va online solo quando siete davvero soddisfatti — e solo allora pagate.",
+    g_badge:"La mia garanzia", g_title:"Prima soddisfatti, poi pagate",
+    g_body:"Nessun rischio per voi. Vedete prima il risultato. Se non vi piace, non costa nulla. Semplice.",
+    p_title:"Quanto costa", p1_label:"{{TIER_LABEL}}", p1_body:"{{TIER_BODY}}",
+    upkeep:"+ {{CURRENCY}}{{YEARLY_UPKEEP}} all'anno per dominio, email aziendale e manutenzione.",
+    seo_title:"Farsi trovare anche su Google",
+    seo_body:"Il sito è costruito perché i clienti vi trovino più facilmente su Google — con il vostro paese, la vostra offerta e una buona tecnica dietro le quinte. In più una email aziendale e, se volete, un piccolo assistente in chat che risponde da solo alle domande più frequenti.",
+    tip:"<strong>Consiglio dall'Alto Adige:</strong> per la digitalizzazione delle piccole imprese ci sono spesso contributi provinciali. Ditemelo — vi aiuto volentieri a trovare quello giusto.",
+    foot:"Scritto da {{OPERATOR_NAME}} · {{BRAND_NAME}} · <a href='https://{{MAIN_WEBSITE}}'>{{MAIN_WEBSITE}}</a>"
+  },
+  en:{
+    eyebrow:"How I work",
+    intro:"Hi {{BUSINESS_NAME}} in {{TOWN}}!",
+    sub:"I build modern websites for local businesses — and I've already put together a first preview for you. Here's a quick look at how I work and what it costs.",
+    how_title:"In three simple steps",
+    s1t:"Look at the preview", s1b:"Take a look at the small preview of your possible site. Free, no obligation.",
+    s2t:"Adjust it together", s2b:"If you like the direction, we tune the words, photos and colours until it looks truly yours.",
+    s3t:"Happy first, then you pay", s3b:"The site goes live only when you're genuinely happy — and only then do you pay.",
+    g_badge:"My guarantee", g_title:"Happy first, then you pay",
+    g_body:"No risk for you. You see the result first. If you don't like it, it costs nothing. That simple.",
+    p_title:"What it costs", p1_label:"{{TIER_LABEL}}", p1_body:"{{TIER_BODY}}",
+    upkeep:"+ {{CURRENCY}}{{YEARLY_UPKEEP}} per year for the domain, a business email address and ongoing upkeep.",
+    seo_title:"Get found on Google too",
+    seo_body:"Your site is built so customers find you more easily on Google — with your town, your offer and clean technology behind the scenes. Plus your own business email and, if you want, a small chat assistant that answers your customers' common questions automatically.",
+    tip:"<strong>Local tip:</strong> there are often regional grants for digitalising small businesses. Let me know — I'm happy to help you find the right one.",
+    foot:"Written by {{OPERATOR_NAME}} · {{BRAND_NAME}} · <a href='https://{{MAIN_WEBSITE}}'>{{MAIN_WEBSITE}}</a>"
+  },
+  ro:{
+    eyebrow:"Cum lucrez",
+    intro:"Salut {{BUSINESS_NAME}} din {{TOWN}}!",
+    sub:"Construiesc site-uri moderne pentru afaceri locale — iar pentru voi am pregătit deja o primă previzualizare. Iată pe scurt cum lucrez și cât costă.",
+    how_title:"În trei pași simpli",
+    s1t:"Vedeți previzualizarea", s1b:"Aruncați o privire la mica previzualizare a site-ului vostru posibil. Gratis, fără obligații.",
+    s2t:"Ajustăm împreună", s2b:"Dacă vă place direcția, potrivim textele, pozele și culorile până arată cu adevărat ca voi.",
+    s3t:"Întâi mulțumiți, apoi plătiți", s3b:"Site-ul intră online doar când sunteți cu adevărat mulțumiți — și abia atunci plătiți.",
+    g_badge:"Garanția mea", g_title:"Întâi mulțumiți, apoi plătiți",
+    g_body:"Niciun risc pentru voi. Vedeți întâi rezultatul. Dacă nu vă place, nu costă nimic. Atât de simplu.",
+    p_title:"Cât costă", p1_label:"{{TIER_LABEL}}", p1_body:"{{TIER_BODY}}",
+    upkeep:"+ {{CURRENCY}}{{YEARLY_UPKEEP}} pe an pentru domeniu, o adresă de email de business și mentenanță.",
+    seo_title:"Să fiți găsiți și pe Google",
+    seo_body:"Site-ul este construit astfel încât clienții să vă găsească mai ușor pe Google — cu localitatea voastră, oferta voastră și o tehnică curată în spate. În plus, o adresă de email de business și, dacă doriți, un mic asistent de chat care răspunde automat la întrebările frecvente.",
+    tip:"<strong>Sfat local:</strong> există adesea finanțări regionale pentru digitalizarea micilor afaceri. Spuneți-mi — vă ajut cu plăcere să o găsiți pe cea potrivită.",
+    foot:"Scris de {{OPERATOR_NAME}} · {{BRAND_NAME}} · <a href='https://{{MAIN_WEBSITE}}'>{{MAIN_WEBSITE}}</a>"
+  }
+};
+
+function setLang(lang){
+  const dict = I18N[lang]; if(!dict) return;
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(dict[k] != null) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll(".lang").forEach(b=>b.classList.toggle("active", b.dataset.lang===lang));
+}
+document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
+setLang("de"); // LOCAL default; matches the prospect's language per §6.1
+</script>
+</body>
+</html>

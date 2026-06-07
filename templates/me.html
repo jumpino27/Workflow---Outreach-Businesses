@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  me.html  —  CLIENT "HOW I WORK" PAGE  ·  AWAY MODE (remote / worldwide)
+  ============================================================================
+  WHAT THIS IS:
+    Same idea as document.html, but for prospects OUTSIDE your home turf.
+    It drops the "local neighbour" framing and the regional-grant tip, uses a
+    remote/worldwide pitch, and prices at ≈ {{AWAY_DISCOUNT}}% BELOW the
+    comparable local agency for the prospect's market.
+
+  USE THIS FILE WHEN: OPERATING_MODE=AWAY.
+  The LOCAL / home-turf version is document.html.
+
+  IMPORTANT (pricing): the public page says "≈ {{AWAY_DISCOUNT}}% below
+  comparable local agencies, exact quote after a quick look at your market".
+  You (the operator) do the research and put a REAL number in your reply/quote.
+  If you already know the number for this lead, you may print it in {{PRICE_AMOUNT}}.
+
+  TOKENS the agent replaces per business:
+    {{BUSINESS_NAME}}  {{TOWN}}        ← the prospect
+    {{OPERATOR_NAME}}  {{BRAND_NAME}}  {{MAIN_WEBSITE}}  ← from .env
+    {{AWAY_DISCOUNT}}  {{CURRENCY}}    {{YEARLY_UPKEEP}} ← from .env
+    {{PRICE_AMOUNT}}   ← optional concrete quote, or leave the "below market" line
+    {{TIER_LABEL}}     {{TIER_BODY}}
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How I work — {{BUSINESS_NAME}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2024; --soft:#525a62; --line:#dfe3e7;
+    --paper:#f6f8fa; --card:#ffffff; --accent:#1f6f6b; --accent-soft:#dcefed;
+    --good:#2f6f5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Outfit",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  h1,h2{font-family:"Fraunces",Georgia,serif;font-weight:600;line-height:1.15;letter-spacing:-.01em}
+  h1{font-size:2.4rem;margin-bottom:14px}
+  h2{font-size:1.5rem;margin-bottom:14px}
+  p{color:var(--soft);margin-bottom:14px}
+  .langbar{position:sticky;top:0;z-index:5;background:rgba(246,248,250,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .langbar .row{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:12px 24px;max-width:760px;margin:0 auto}
+  .langbar .brand{margin-right:auto;font-family:"Fraunces",serif;font-weight:600;color:var(--ink)}
+  .lang{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--card);color:var(--soft);border-radius:999px;padding:6px 13px;cursor:pointer}
+  .lang.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .hero{padding:56px 0 40px}
+  .eyebrow{color:var(--accent);font-weight:600;font-size:.95rem;margin-bottom:10px}
+  section{padding:34px 0;border-top:1px solid var(--line)}
+  .steps{display:grid;gap:16px;margin-top:8px}
+  .step{display:flex;gap:16px;align-items:flex-start}
+  .step .n{flex:0 0 38px;height:38px;border-radius:12px;background:var(--accent-soft);color:var(--accent);font-family:"Fraunces",serif;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.05rem;margin-bottom:2px;color:var(--ink);font-weight:600}
+  .step p{margin:0}
+  .guarantee{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+  .guarantee .badge{display:inline-block;background:var(--good);color:#fff;font-size:.8rem;font-weight:600;padding:5px 12px;border-radius:999px;margin-bottom:12px}
+  .price{background:var(--ink);color:var(--paper);border-radius:20px;padding:30px}
+  .price h2{color:var(--paper)}
+  .price p{color:#cfd6db}
+  .amount{font-family:"Fraunces",serif;font-size:2.2rem;font-weight:600;color:#fff;margin:6px 0}
+  .upkeep{font-size:.92rem;color:#aab4bb;border-top:1px solid #333a40;padding-top:14px;margin-top:14px}
+  footer{padding:40px 0;border-top:1px solid var(--line);color:var(--soft);font-size:.92rem}
+  footer a{color:var(--accent);text-decoration:none}
+  @media(max-width:520px){h1{font-size:1.95rem}.langbar .brand{display:none}}
+</style>
+</head>
+<body>
+
+<div class="langbar">
+  <div class="row">
+    <span class="brand">{{BRAND_NAME}}</span>
+    <button class="lang" data-lang="de">DE</button>
+    <button class="lang" data-lang="it">IT</button>
+    <button class="lang active" data-lang="en">EN</button>
+    <button class="lang" data-lang="ro">RO</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow" data-i18n="eyebrow">How I work</div>
+    <h1 data-i18n="intro">Hi {{BUSINESS_NAME}} in {{TOWN}}!</h1>
+    <p data-i18n="sub">I build modern websites for businesses like yours — and I've already put together a first preview for you. Here's how I work and what it costs, wherever you are.</p>
+  </header>
+
+  <section>
+    <h2 data-i18n="how_title">In three simple steps</h2>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div><h3 data-i18n="s1t">Look at the preview</h3><p data-i18n="s1b">Take a look at the small preview of your possible site. Free, no obligation.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3 data-i18n="s2t">Adjust it together</h3><p data-i18n="s2b">If you like the direction, we tune the words, photos and colours over a quick call until it's truly yours.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3 data-i18n="s3t">Happy first, then you pay</h3><p data-i18n="s3b">The site goes live only when you're genuinely happy — and only then do you pay.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="guarantee">
+      <span class="badge" data-i18n="g_badge">My guarantee</span>
+      <h2 data-i18n="g_title">Happy first, then you pay</h2>
+      <p data-i18n="g_body">No risk for you. You see the result first. If you don't like it, it costs nothing. That simple — and distance changes nothing about that.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="price">
+      <h2 data-i18n="p_title">What it costs</h2>
+      <p data-i18n="p1_label">{{TIER_LABEL}}</p>
+      <div class="amount" data-i18n="p1_amt">≈ {{AWAY_DISCOUNT}}% below comparable local agencies</div>
+      <p data-i18n="p1_body">{{TIER_BODY}} I send the exact quote after a quick look at your market — same quality, clearly better value.</p>
+      <div class="upkeep" data-i18n="upkeep">+ {{CURRENCY}}{{YEARLY_UPKEEP}} per year for the domain, a business email address and ongoing upkeep.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-i18n="seo_title">Found on Google, run remotely, no hassle</h2>
+    <p data-i18n="seo_body">Your site is built so customers find you more easily on Google — with your town, your offer and clean technology behind the scenes. We work entirely online: a short call, a few messages, and it's done. You also get your own business email and, if you want, a small chat assistant that answers common questions automatically.</p>
+  </section>
+
+  <footer>
+    <p style="margin:0" data-i18n="foot">Written by {{OPERATOR_NAME}} · {{BRAND_NAME}} · <a href="https://{{MAIN_WEBSITE}}">{{MAIN_WEBSITE}}</a></p>
+  </footer>
+
+</div>
+
+<script>
+const I18N = {
+  de:{
+    eyebrow:"So arbeite ich",
+    intro:"Hallo {{BUSINESS_NAME}} in {{TOWN}}!",
+    sub:"Ich baue moderne Webseiten für Betriebe wie euren — und für euch hätte ich schon eine erste Vorschau zusammengestellt. So arbeite ich und das kostet es, ganz egal wo ihr seid.",
+    how_title:"In drei einfachen Schritten",
+    s1t:"Vorschau ansehen", s1b:"Ihr schaut euch die kleine Vorschau eurer möglichen Seite an. Kostenlos, unverbindlich.",
+    s2t:"Gemeinsam anpassen", s2b:"Gefällt euch die Richtung, passen wir Texte, Bilder und Farben in einem kurzen Gespräch an, bis sie ganz euch gehört.",
+    s3t:"Zufrieden, dann zahlen", s3b:"Erst wenn ihr wirklich zufrieden seid, geht die Seite online — und erst dann zahlt ihr.",
+    g_badge:"Meine Garantie", g_title:"Zuerst zufrieden, dann zahlen",
+    g_body:"Kein Risiko für euch. Ihr seht zuerst das Ergebnis. Gefällt es euch nicht, kostet es nichts. So einfach — Entfernung ändert daran nichts.",
+    p_title:"Was es kostet", p1_label:"{{TIER_LABEL}}",
+    p1_amt:"≈ {{AWAY_DISCOUNT}}% unter vergleichbaren lokalen Agenturen",
+    p1_body:"{{TIER_BODY}} Das genaue Angebot schicke ich nach einem kurzen Blick auf euren Markt — gleiche Qualität, klar besserer Preis.",
+    upkeep:"+ {{CURRENCY}}{{YEARLY_UPKEEP}} pro Jahr für Domain, geschäftliche E-Mail-Adresse und laufende Pflege.",
+    seo_title:"Bei Google gefunden, komplett aus der Ferne",
+    seo_body:"Eure Seite wird so gebaut, dass Gäste euch leichter über Google finden — mit eurem Ort, eurem Angebot und sauberer Technik im Hintergrund. Wir arbeiten komplett online: ein kurzes Gespräch, ein paar Nachrichten, fertig. Dazu eine eigene geschäftliche E-Mail-Adresse und auf Wunsch ein kleiner Chat-Assistent.",
+    foot:"Geschrieben von {{OPERATOR_NAME}} · {{BRAND_NAME}} · <a href='https://{{MAIN_WEBSITE}}'>{{MAIN_WEBSITE}}</a>"
+  },
+  it:{
+    eyebrow:"Come lavoro",
+    intro:"Ciao {{BUSINESS_NAME}} a {{TOWN}}!",
+    sub:"Realizzo siti moderni per attività come la vostra — e per voi ho già preparato una prima anteprima. Ecco come lavoro e quanto costa, ovunque vi troviate.",
+    how_title:"In tre semplici passi",
+    s1t:"Guardate l'anteprima", s1b:"Date un'occhiata alla piccola anteprima del vostro possibile sito. Gratis, senza impegno.",
+    s2t:"Sistemiamo insieme", s2b:"Se la direzione vi piace, adattiamo testi, foto e colori in una breve chiamata, finché non rispecchia voi.",
+    s3t:"Prima soddisfatti, poi pagate", s3b:"Il sito va online solo quando siete davvero soddisfatti — e solo allora pagate.",
+    g_badge:"La mia garanzia", g_title:"Prima soddisfatti, poi pagate",
+    g_body:"Nessun rischio per voi. Vedete prima il risultato. Se non vi piace, non costa nulla. Semplice — la distanza non cambia nulla.",
+    p_title:"Quanto costa", p1_label:"{{TIER_LABEL}}",
+    p1_amt:"≈ {{AWAY_DISCOUNT}}% in meno delle agenzie locali simili",
+    p1_body:"{{TIER_BODY}} Il preventivo esatto ve lo mando dopo una rapida occhiata al vostro mercato — stessa qualità, prezzo chiaramente migliore.",
+    upkeep:"+ {{CURRENCY}}{{YEARLY_UPKEEP}} all'anno per dominio, email aziendale e manutenzione.",
+    seo_title:"Trovati su Google, tutto a distanza",
+    seo_body:"Il sito è costruito perché i clienti vi trovino più facilmente su Google — con il vostro paese, la vostra offerta e una buona tecnica dietro le quinte. Lavoriamo del tutto online: una breve chiamata, qualche messaggio, fatto. In più una email aziendale e, se volete, un piccolo assistente in chat.",
+    foot:"Scritto da {{OPERATOR_NAME}} · {{BRAND_NAME}} · <a href='https://{{MAIN_WEBSITE}}'>{{MAIN_WEBSITE}}</a>"
+  },
+  en:{
+    eyebrow:"How I work",
+    intro:"Hi {{BUSINESS_NAME}} in {{TOWN}}!",
+    sub:"I build modern websites for businesses like yours — and I've already put together a first preview for you. Here's how I work and what it costs, wherever you are.",
+    how_title:"In three simple steps",
+    s1t:"Look at the preview", s1b:"Take a look at the small preview of your possible site. Free, no obligation.",
+    s2t:"Adjust it together", s2b:"If you like the direction, we tune the words, photos and colours over a quick call until it's truly yours.",
+    s3t:"Happy first, then you pay", s3b:"The site goes live only when you're genuinely happy — and only then do you pay.",
+    g_badge:"My guarantee", g_title:"Happy first, then you pay",
+    g_body:"No risk for you. You see the result first. If you don't like it, it costs nothing. That simple — and distance changes nothing about that.",
+    p_title:"What it costs", p1_label:"{{TIER_LABEL}}",
+    p1_amt:"≈ {{AWAY_DISCOUNT}}% below comparable local agencies",
+    p1_body:"{{TIER_BODY}} I send the exact quote after a quick look at your market — same quality, clearly better value.",
+    upkeep:"+ {{CURRENCY}}{{YEARLY_UPKEEP}} per year for the domain, a business email address and ongoing upkeep.",
+    seo_title:"Found on Google, run remotely, no hassle",
+    seo_body:"Your site is built so customers find you more easily on Google — with your town, your offer and clean technology behind the scenes. We work entirely online: a short call, a few messages, and it's done. You also get your own business email and, if you want, a small chat assistant that answers common questions automatically.",
+    foot:"Written by {{OPERATOR_NAME}} · {{BRAND_NAME}} · <a href='https://{{MAIN_WEBSITE}}'>{{MAIN_WEBSITE}}</a>"
+  },
+  ro:{
+    eyebrow:"Cum lucrez",
+    intro:"Salut {{BUSINESS_NAME}} din {{TOWN}}!",
+    sub:"Construiesc site-uri moderne pentru afaceri ca a voastră — iar pentru voi am pregătit deja o primă previzualizare. Iată cum lucrez și cât costă, oriunde v-ați afla.",
+    how_title:"În trei pași simpli",
+    s1t:"Vedeți previzualizarea", s1b:"Aruncați o privire la mica previzualizare a site-ului vostru posibil. Gratis, fără obligații.",
+    s2t:"Ajustăm împreună", s2b:"Dacă vă place direcția, potrivim textele, pozele și culorile într-un apel scurt, până arată cu adevărat ca voi.",
+    s3t:"Întâi mulțumiți, apoi plătiți", s3b:"Site-ul intră online doar când sunteți cu adevărat mulțumiți — și abia atunci plătiți.",
+    g_badge:"Garanția mea", g_title:"Întâi mulțumiți, apoi plătiți",
+    g_body:"Niciun risc pentru voi. Vedeți întâi rezultatul. Dacă nu vă place, nu costă nimic. Simplu — distanța nu schimbă nimic.",
+    p_title:"Cât costă", p1_label:"{{TIER_LABEL}}",
+    p1_amt:"≈ cu {{AWAY_DISCOUNT}}% sub agențiile locale comparabile",
+    p1_body:"{{TIER_BODY}} Vă trimit oferta exactă după o privire rapidă asupra pieței voastre — aceeași calitate, preț net mai bun.",
+    upkeep:"+ {{CURRENCY}}{{YEARLY_UPKEEP}} pe an pentru domeniu, o adresă de email de business și mentenanță.",
+    seo_title:"Găsiți pe Google, totul de la distanță",
+    seo_body:"Site-ul este construit astfel încât clienții să vă găsească mai ușor pe Google — cu localitatea voastră, oferta voastră și o tehnică curată în spate. Lucrăm complet online: un apel scurt, câteva mesaje, gata. În plus, o adresă de email de business și, dacă doriți, un mic asistent de chat.",
+    foot:"Scris de {{OPERATOR_NAME}} · {{BRAND_NAME}} · <a href='https://{{MAIN_WEBSITE}}'>{{MAIN_WEBSITE}}</a>"
+  }
+};
+
+function setLang(lang){
+  const dict = I18N[lang]; if(!dict) return;
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(dict[k] != null) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll(".lang").forEach(b=>b.classList.toggle("active", b.dataset.lang===lang));
+}
+document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
+setLang("en"); // AWAY default; the agent switches to the prospect's language per §6.1
+</script>
+</body>
+</html>
