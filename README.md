@@ -94,6 +94,67 @@ ledger, same rules. (Section 3.6 of the manual.)
 
 ---
 
+## 💬 Prompts to copy-paste (just talk to Claude Code)
+
+Open this folder in Claude Code and type one of these. The `@` lets Claude read a file directly.
+
+**▶️ Start a normal run (the everyday one):**
+```
+read @business-outreach.md and let's start
+```
+
+**▶️ Be explicit about the niche + area:**
+```
+read @business-outreach.md — let's do a LOCAL run: Gasthöfe & Pensionen in the
+Pustertal that have no website. Build me the top 10 packages.
+```
+```
+read @business-outreach.md — AWAY mode: restaurants in Lisbon with no website.
+Research local web-design prices first, then build 10 packages with me.html.
+```
+
+**▶️ Check memory before starting (so nobody gets contacted twice):**
+```
+read @outreach/done.md first, tell me who's already been contacted, then
+read @business-outreach.md and find 10 fresh businesses.
+```
+
+**▶️ Build the package for one specific business you already found:**
+```
+read @business-outreach.md — build a full package for "Gasthof Sonne" in Bruneck,
+4.6★, 128 reviews, no website, phone +39 0474 555123. Tier A landing page.
+```
+
+**▶️ Just the preview (uses the bundled /image + /impeccable skills):**
+```
+read @business-outreach.md §8.5 and build only the preview.html for
+Pizzeria Roma in Bozen — Italian, warm modern look. Use /impeccable craft and /image.
+```
+
+**▶️ Handle the inbound / warm motion:**
+```
+read @business-outreach.md §3.6 — someone on kleinanzeigen-suedtirol posted
+"suche Webdesigner für mein Café". Draft me a warm, non-spammy reply.
+```
+
+**▶️ After you've sent some emails, update the ledger:**
+```
+update @outreach/done.md: mark Gasthof Sonne as "sent" today, and Pizzeria Roma
+as "opted_out" (they replied STOP).
+```
+
+**▶️ Draft a follow-up for a no-reply:**
+```
+read @business-outreach.md §10 — draft followup-2 for Gasthof Sonne (no reply yet),
+same German, add one new improvement idea.
+```
+
+> 💡 **First time?** Make sure you've copied `.env.example` → `.env` and put your OpenAI key in it
+> (see setup above). Then `read @business-outreach.md and let's start` is all you need — Claude will
+> walk through loading `done.md`, finding businesses, and building the packages with you.
+
+---
+
 ## 🔒 Why it's built to keep you legal
 
 You'll likely be emailing into **Italy, Germany, and Austria — the strictest cold-email countries in
