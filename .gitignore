@@ -1,0 +1,24 @@
+# ── Secrets ──────────────────────────────────────────────────────────────────
+# Your real .env holds the OPENAI_API_KEY — NEVER commit it.
+# The repo ships .env.example as the template; copy it to .env and fill it in.
+.env
+.env.local
+*.key
+
+# ── Generated outreach output (per-business packages) ────────────────────────
+# Keep the ledger + the example folder, ignore real generated business folders.
+outreach/businesses/*/
+!outreach/businesses/_EXAMPLE-*/
+outreach/run-index-*.md
+outreach/done.csv
+
+# ── Skill runtime / caches ───────────────────────────────────────────────────
+.claude/skills/**/__pycache__/
+.claude/skills/impeccable/.storage/
+.claude/skills/impeccable/**/node_modules/
+*.pyc
+
+# ── OS / editor cruft ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini

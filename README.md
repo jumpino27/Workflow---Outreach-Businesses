@@ -26,9 +26,13 @@ not a promise.
 
 ```
 Workflow - Outreach Businesses/
-├── .env                    ← ⭐ EDIT THIS. Your name, brand, prices, mode — all here.
+├── .env                    ← ⭐ EDIT THIS (your copy). Name, brand, prices, mode, OpenAI key.
+├── .env.example            ← The template that ships in the repo. Copy it to .env to start.
 ├── business-outreach.md    ← The full "operating manual" the AI agent follows.
 ├── README.md               ← You are here. 🙂
+├── .claude/skills/         ← The two skills this workflow uses, bundled in:
+│   ├── image/              ←   /image — generates the preview photos (reads your OpenAI key from .env)
+│   └── impeccable/         ←   /impeccable — designs + quality-gates each preview.html
 ├── templates/
 │   ├── document.html       ← LOCAL client page ("how I work" + price). Home-turf version.
 │   └── me.html             ← AWAY client page. Remote/worldwide version.
@@ -36,6 +40,16 @@ Workflow - Outreach Businesses/
     ├── done.md             ← The agent's permanent memory. Who's already been contacted.
     └── businesses/         ← One sub-folder per business gets created here, each run.
 ```
+
+### 🔑 First-time setup (1 minute)
+
+The repo ships **`.env.example`** (no secrets). To start:
+
+1. **Copy it:** `copy .env.example .env`  (PowerShell) — your real `.env` is git-ignored, so your key never leaves your machine.
+2. **Open `.env`** and paste your OpenAI key into `OPENAI_API_KEY="sk-..."`. The bundled `/image` skill reads it straight from this file (`.claude/skills/image/image.py` resolves the project `.env` automatically) to generate each business's preview photos.
+3. Make sure the image deps are installed once: `pip install openai python-dotenv pillow`.
+
+> The **two bundled skills** live in `.claude/skills/` so the workflow is self-contained — `/image` for the preview imagery and `/impeccable` for designing and quality-checking every `preview.html` (run `npx impeccable detect` as the final gate). They're copies of the standard skills; `/image` is the only one repointed to read your key from this project's `.env`.
 
 ### The two HTML pages — what each is for 📄
 
