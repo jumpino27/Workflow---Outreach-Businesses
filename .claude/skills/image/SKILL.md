@@ -32,9 +32,9 @@ pip install openai python-dotenv pillow
   then falls back to the current dir, a legacy global path, and finally the
   `OPENAI_API_KEY` env var. **Never** hardcoded, never printed.
   → Put your key in `Workflow - Outreach Businesses/.env` as `OPENAI_API_KEY="sk-..."`.
-- Pairs with the `/crop` skill for keying/slicing. This project bundles only `/image`
-  and `/impeccable`, so `image.py` falls back to the global `~/.claude/skills/crop/crop.py`
-  when a transparent asset needs cutting out (opaque previews don't need it).
+- Pairs with the bundled `/crop` skill (`.claude/skills/crop/crop.py`) for keying/slicing —
+  `image.py` auto-chains to it for transparent assets (opaque previews don't need it).
+  Falls back to the global `~/.claude/skills/crop/crop.py` if the local copy is missing.
 
 ## STEP 1 — QUALITY GATE (do this every run, before anything else)
 If the user didn't specify a quality tier, **ask them** (use the question UI) and show prices:

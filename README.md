@@ -30,8 +30,9 @@ Workflow - Outreach Businesses/
 ├── .env.example            ← The template that ships in the repo. Copy it to .env to start.
 ├── business-outreach.md    ← The full "operating manual" the AI agent follows.
 ├── README.md               ← You are here. 🙂
-├── .claude/skills/         ← The two skills this workflow uses, bundled in:
+├── .claude/skills/         ← The skills this workflow uses, bundled in:
 │   ├── image/              ←   /image — generates the preview photos (reads your OpenAI key from .env)
+│   ├── crop/              ←   /crop — cuts subjects to transparent PNGs / slices sprite sheets
 │   └── impeccable/         ←   /impeccable — designs + quality-gates each preview.html
 ├── templates/
 │   ├── document.html       ← LOCAL client page ("how I work" + price). Home-turf version.
@@ -49,7 +50,7 @@ The repo ships **`.env.example`** (no secrets). To start:
 2. **Open `.env`** and paste your OpenAI key into `OPENAI_API_KEY="sk-..."`. The bundled `/image` skill reads it straight from this file (`.claude/skills/image/image.py` resolves the project `.env` automatically) to generate each business's preview photos.
 3. Make sure the image deps are installed once: `pip install openai python-dotenv pillow`.
 
-> The **two bundled skills** live in `.claude/skills/` so the workflow is self-contained — `/image` for the preview imagery and `/impeccable` for designing and quality-checking every `preview.html` (run `npx impeccable detect` as the final gate). They're copies of the standard skills; `/image` is the only one repointed to read your key from this project's `.env`.
+> The **bundled skills** live in `.claude/skills/` so the workflow is self-contained — `/image` for the preview imagery, `/crop` for cutting any logos/cutouts to transparency, and `/impeccable` for designing and quality-checking every `preview.html` (run `npx impeccable detect` as the final gate). They're copies of the standard skills; `/image` is the only one repointed to read your key from this project's `.env`, and it auto-chains to the bundled `/crop`.
 
 ### The two HTML pages — what each is for 📄
 
